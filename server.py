@@ -2,6 +2,7 @@
 
 import atexit
 import logging
+import socket
 import sys
 
 import gi
@@ -49,7 +50,7 @@ class Server:
             sys.exit(1)
 
         self.sink = Gst.ElementFactory.make("udpsink", "sink")
-        self.sink.set_property("host", self.host)
+        self.sink.set_property("host", socket.gethostbyname(self.host))
         self.sink.set_property("port", int(self.port))
         if not self.pipeline.add(self.sink):
             self.logger.error("failed to add sink to pipeline")
