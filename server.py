@@ -11,7 +11,14 @@ gi.require_version("GObject", "2.0")
 gi.require_version("Gst", "1.0")
 
 from gi.repository import Gst, GLib  # noqa: E402
+from pydub import AudioSegment
 
+def convert(filepath):
+    print(filepath)
+    title = filepath[0:-4] + '.opus'
+    print(title)
+    AudioSegment.from_mp3(filepath).export(title, format='opus')
+    return title
 
 class Server:
     def __init__(self, filepath, host, port):
@@ -109,6 +116,8 @@ if __name__ == "__main__":
         print(f"Usage: {sys.argv[0]} <filepath> <host> <port>")
         sys.exit(1)
 
+    sys.argv[1] = convert(sys.argv[1])
+    print(sys.argv)
     server = Server(*sys.argv[1:])
     atexit.register(Server.cleanup, server)
 
