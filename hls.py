@@ -5,41 +5,41 @@ import sys
 import signal
 import ffmpeg
 
-HOST = "127.0.0.1"
-PORT = 8080
+IPC_HOST = "127.0.0.1"
+IPC_PORT = 5001
 STREAM_DIR = "stream"
 
 
 # TODO: we need to handle incoming commands, not just echo them back
 def process_commands(mus, path):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-        s.bind((HOST, PORT))
+        s.bind((IPC_HOST, IPC_PORT))
         s.listen(10)
         conn, addr = s.accept()
         with conn:
             print(f"connection established ({addr})")
             while True:
                 data = conn.recv(1024)
-                if not data: 
-                    d = ''
+                if not data:
+                    d = ""
                     continue
                 d = data.decode()
-                if d == 'PAUSE':
-                    print('pause')
+                if d == "PAUSE":
+                    print("pause")
                     mus.send_signal(signal.SIGSTOP)
-                elif d == 'PLAY':
-                    print('play')
+                elif d == "PLAY":
+                    print("play")
                     mus.send_signal(signal.SIGCONT)
-                    #stream_file(path)
-                print('here')
+                    # stream_file(path)
+                print("here")
 
-                #conn.sendall(data)
+                # conn.sendall(data)
 
 
 def stream_file(path):
     # for now we put the file on "repeat", just for proof-of-concept
     process = (
-        ffmpeg.input(path, re='-re', stream_loop='-1')
+        ffmpeg.input(path, re="-re", stream_loop="-1")
         .output(
             f"{STREAM_DIR}/out",
             codec="copy",
