@@ -4,5 +4,5 @@
 
 import requests
 
-r = requests.put('http://0.0.0.0:5000/stream/pause')
+r = requests.put('http://0.0.0.0:5000/stream/play')
 print(r)
