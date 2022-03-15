@@ -47,7 +47,6 @@ def stream_file(path):
             hls_segment_type="mpegts",
             hls_segment_filename=f"{STREAM_DIR}/segment-%02d.ts",
             hls_flags="delete_segments",
-            hls_list_size=0,
             master_pl_name="playlist.m3u8",
         )
         .run_async()
