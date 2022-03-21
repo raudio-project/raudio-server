@@ -40,8 +40,7 @@ def stream_file(path):
     # for now we put the file on "repeat", just for proof-of-concept
     process = (
         ffmpeg.input(path, re="-re", stream_loop="-1")
-        .output(
-            f"{STREAM_DIR}/out",
+        .output(f"{STREAM_DIR}/out",
             codec="copy",
             f="hls",
             hls_segment_type="mpegts",
