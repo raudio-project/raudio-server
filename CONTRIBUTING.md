@@ -38,6 +38,7 @@ where you can find and chat with Raudio contributors.
   * [GStreamer](https://gstreamer.freedesktop.org/)
   * [gst-python](https://gitlab.freedesktop.org/gstreamer/gst-python)
   * [rtpbin](https://gstreamer.freedesktop.org/documentation/rtpmanager/rtpbin.html?gi-language=c)
+  * [ffmpeg](https://ffmpeg.org/)
   * [Python](https://www.python.org/about/gettingstarted/)
 
 ## Areas to Contribute to
