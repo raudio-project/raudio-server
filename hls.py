@@ -4,6 +4,9 @@ import socket
 import sys
 import signal
 import ffmpeg
+import random
+import time
+import os
 
 IPC_HOST = "127.0.0.1"
 IPC_PORT = 5001
@@ -16,30 +19,40 @@ def process_commands(mus, path):
         s.bind((IPC_HOST, IPC_PORT))
         s.listen(10)
         conn, addr = s.accept()
+        conn.setblocking(0)
         with conn:
             print(f"connection established ({addr})")
             while True:
-                data = conn.recv(1024)
-                if not data:
-                    d = ""
+                try:
+                    data = conn.recv(1024)
+                except BlockingIOError:
+                    data = None
+                if not data and mus.poll() == None:
                     continue
-                d = data.decode()
+                if data:
+                    d = data.decode()
+                else:
+                    d = ""
                 if d == "PAUSE":
                     print("pause")
-                    mus.send_signal(signal.SIGSTOP)
+                    #mus.send_signal(signal.SIGSTOP)
                 elif d == "PLAY":
                     print("play")
-                    mus.send_signal(signal.SIGCONT)
-                    # stream_file(path)
-                print("here")
-
+                    #mus.send_signal(signal.SIGCONT)
+                elif d == "SKIP" or mus.poll() != None:
+                    print("skip")
+                    mus.kill()
+                    song = random.choice(os.listdir("songs"))
+                    song = "songs/" + song
+                    time.sleep(3)
+                    mus = stream_file(song)
                 # conn.sendall(data)
 
 
 def stream_file(path):
     # for now we put the file on "repeat", just for proof-of-concept
     process = (
-        ffmpeg.input(path, re="-re", stream_loop="-1")
+        ffmpeg.input(path, re="-re")
         .output(
             f"{STREAM_DIR}/out",
             codec="copy",
@@ -66,3 +79,4 @@ if __name__ == "__main__":
 
     # this does nothing for now :(
     process_commands(mus, sys.argv[1])
+
