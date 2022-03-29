@@ -57,9 +57,10 @@ def stream_file(path):
             f"{STREAM_DIR}/out",
             codec="copy",
             f="hls",
+            hls_start_number_source="epoch",
             hls_segment_type="mpegts",
             hls_segment_filename=f"{STREAM_DIR}/segment-%02d.ts",
-            hls_flags="delete_segments",
+            hls_flags="append_list+discont_start",
             master_pl_name="playlist.m3u8",
         )
         .run_async()
