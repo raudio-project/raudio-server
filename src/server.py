@@ -48,6 +48,16 @@ def pause():
     # print(f'Received {data!r}')
     return "200 OK"
 
+@app.route("/stream/skip", methods=["PUT"])
+def skip():
+    # with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    #    s.connect((HOST, PORT))
+    method = "SKIP"
+    s.sendall(str.encode(method))
+    # data = s.recv(1024)
+
+    # print(f'Received {data!r}')
+    return "200 OK"
 
 if __name__ == "__main__":
     # TODO: use a real WSGI server for production
