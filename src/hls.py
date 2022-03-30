@@ -4,6 +4,7 @@ import socket
 import sys
 import signal
 import ffmpeg
+import os
 
 IPC_HOST = "127.0.0.1"
 IPC_PORT = 5001
