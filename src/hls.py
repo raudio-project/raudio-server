@@ -10,7 +10,7 @@ import os
 
 IPC_HOST = "127.0.0.1"
 IPC_PORT = 5001
-STREAM_DIR = "stream"
+STREAM_DIR = "src/stream"
 
 
 # TODO: we need to handle incoming commands, not just echo them back
