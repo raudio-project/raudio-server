@@ -1,4 +1,6 @@
 __pycache__/
 stream/
+dist/
+*.egg-info/
 scratch/
 bot.py
