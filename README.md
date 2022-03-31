@@ -7,6 +7,18 @@
   <img src="https://img.shields.io/github/issues/raudio-project/raudio-server?color=green">
 </p>
 
+## Installation
+Coming soon.
+
+## Setting a up a development environment
+```sh
+$ git clone git@github.com:raudio-project/raudio-server.git
+$ cd raudio-server
+$ python3 -m venv venv      # Create a Python virtual environment
+$ source venv/bin/activate  # Activate the enviornment
+$ pip3 install .            # Install the package
+```
+
 <p align="center">
 <img src="https://yld.moe/raw/lOk.png" width="40%">
 </p>
