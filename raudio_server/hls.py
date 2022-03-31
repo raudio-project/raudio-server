@@ -13,6 +13,7 @@ import ffmpeg
 IPC_HOST = "127.0.0.1"
 IPC_PORT = 5001
 STREAM_DIR = pathlib.Path.cwd() / "stream"
+SONGS_DIR = pathlib.Path.cwd() / "songs"
 
 
 def process_commands(mus, path):
@@ -43,8 +44,8 @@ def process_commands(mus, path):
                 elif d == "SKIP" or mus.poll() != None:
                     print("skip")
                     mus.kill()
-                    song = random.choice(os.listdir("songs"))
-                    song = "songs/" + song
+                    song = random.choice(os.listdir(SONGS_DIR))
+                    song = SONGS_DIR / song
                     time.sleep(3)
                     mus = stream_file(song)
                 # conn.sendall(data)
