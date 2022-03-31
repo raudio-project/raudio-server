@@ -15,7 +15,6 @@ IPC_PORT = 5001
 STREAM_DIR = pathlib.Path.cwd() / "stream"
 
 
-# TODO: we need to handle incoming commands, not just echo them back
 def process_commands(mus, path):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((IPC_HOST, IPC_PORT))
@@ -52,7 +51,6 @@ def process_commands(mus, path):
 
 
 def stream_file(path):
-    # for now we put the file on "repeat", just for proof-of-concept
     temp = os.path.basename(path)
     process = (
         ffmpeg.input(path, re="-re")
@@ -77,11 +75,6 @@ if __name__ == "__main__":
         print("usage: hls.py <file.mp3>")
         sys.exit(1)
 
-    # TODO: make this function non-blocking... ffmpeg's run_async will be
-    # a start, but it's still not quite what we want
     STREAM_DIR.mkdir(exist_ok=True)
     mus = stream_file(sys.argv[1])
-
-    # this does nothing for now :(
     process_commands(mus, sys.argv[1])
-
