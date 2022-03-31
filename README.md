@@ -9,6 +9,9 @@
 
 ## Installation
 
+For this server to work, you must make sure [FFMPEG](https://ffmpeg.org/)
+is installed to your machine.
+
 Install the package, optionally in a virtual environment:
 
 `pip install raudio-server`
