@@ -37,10 +37,10 @@ def process_commands(mus, path):
                     d = ""
                 if d == "PAUSE":
                     print("pause")
-                    #mus.send_signal(signal.SIGSTOP)
+                    # mus.send_signal(signal.SIGSTOP)
                 elif d == "PLAY":
                     print("play")
-                    #mus.send_signal(signal.SIGCONT)
+                    # mus.send_signal(signal.SIGCONT)
                 elif d == "SKIP" or mus.poll() != None:
                     print("skip")
                     mus.kill()
