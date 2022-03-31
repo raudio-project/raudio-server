@@ -8,7 +8,18 @@
 </p>
 
 ## Installation
-Coming soon.
+
+Install the package, optionally in a virtual environment:
+
+`pip install raudio-server`
+
+Run the HLS streaming backend:
+
+`python3 -m raudio_server.hls /path/to/file.mp3`
+
+Run the HTTP server in a separate terminal:
+
+`python3 -m raudio_server.server`
 
 ## Setting a up a development environment
 ```sh

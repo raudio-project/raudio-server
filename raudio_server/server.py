@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
-from flask import Flask, redirect, send_from_directory
+import pathlib
 import socket
+
+from flask import Flask, redirect, send_from_directory
 
 app = Flask(__name__)
 
@@ -22,7 +24,7 @@ def playlist():
 
 @app.route("/stream/<path:name>", methods=("GET",))
 def get_stream_data(name):
-    return send_from_directory("stream", name)
+    return send_from_directory(pathlib.Path.cwd() / "stream", name)
 
 
 @app.route("/stream/play", methods=["PUT"])
@@ -48,6 +50,7 @@ def pause():
     # print(f'Received {data!r}')
     return "200 OK"
 
+
 @app.route("/stream/skip", methods=["PUT"])
 def skip():
     # with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -58,6 +61,7 @@ def skip():
 
     # print(f'Received {data!r}')
     return "200 OK"
+
 
 if __name__ == "__main__":
     # TODO: use a real WSGI server for production
