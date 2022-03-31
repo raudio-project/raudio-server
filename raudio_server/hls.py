@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import pathlib
 import random
 import signal
 import socket
@@ -11,7 +12,7 @@ import ffmpeg
 
 IPC_HOST = "127.0.0.1"
 IPC_PORT = 5001
-STREAM_DIR = "src/stream"
+STREAM_DIR = pathlib.Path.cwd() / "stream"
 
 
 # TODO: we need to handle incoming commands, not just echo them back
@@ -78,6 +79,7 @@ if __name__ == "__main__":
 
     # TODO: make this function non-blocking... ffmpeg's run_async will be
     # a start, but it's still not quite what we want
+    STREAM_DIR.mkdir(exist_ok=True)
     mus = stream_file(sys.argv[1])
 
     # this does nothing for now :(
