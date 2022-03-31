@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
+import os
+import random
+import signal
 import socket
 import sys
-import signal
-import ffmpeg
-import random
 import time
-import os
+
+import ffmpeg
 
 IPC_HOST = "127.0.0.1"
 IPC_PORT = 5001
