@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
-from flask import Flask, redirect, send_from_directory
+import pathlib
 import socket
+
+from flask import Flask, redirect, send_from_directory
 
 app = Flask(__name__)
 
@@ -22,7 +24,7 @@ def playlist():
 
 @app.route("/stream/<path:name>", methods=("GET",))
 def get_stream_data(name):
-    return send_from_directory("stream", name)
+    return send_from_directory(pathlib.Path.cwd() / "stream", name)
 
 
 @app.route("/stream/play", methods=["PUT"])
